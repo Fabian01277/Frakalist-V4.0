@@ -2,34 +2,291 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>TESTEANDO COMO HACER ESTO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraka List V4.0</title>
   <style>
-    /* Aquí va el diseño (CSS) */
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
-      color: #333;
+      background-color: darkred;
+      color: white;
+      font-family: sans-serif;
       text-align: center;
-      padding: 50px;
-    }
-    .caja {
-      background: white;
       padding: 30px;
-      border-radius: 10px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    h1 { color: #2563eb; }
+
+    h1 {
+      color: red;
+      font-size: 50px;
+    }
+
+    button {
+      background-color: #22c55e;
+      color: black;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 90px;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .naranja {
+      background-color: orange;
+      color: white;
+    }
+
+    .hanky {
+      background-color: purple;
+      color: white;
+    }
+
+    /* Oculta las pantallas secundarias al entrar */
+    .oculto {
+      display: none;
+    }
+
+    /* Diseño de cada tarjeta de nivel */
+    .tarjeta {
+      background-color: #1e293b;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: left;
+      border-left: 6px solid #38bdf8;
+    }
+
+    .tarjeta h2 {
+      margin: 0 0 8px 0;
+      color: #38bdf8;
+    }
+
+    .tarjeta p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    /* Diseño de cada tarjeta de jugador */
+    .tarjeta-jugador {
+      background-color: #1e293b;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: left;
+      border-left: 6px solid orange;
+    }
+
+    .tarjeta-jugador h2 {
+      margin: 0 0 8px 0;
+      color: orange;
+    }
+
+    .tarjeta-jugador p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    /* Diseño de cada tarjeta de reglas */
+    .tarjeta-regla {
+      background-color: #1e293b;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: left;
+      border-left: 6px solid #a855f7;
+    }
+
+    .tarjeta-regla h2 {
+      margin: 0 0 8px 0;
+      color: #c084fc;
+    }
+
+    .tarjeta-regla p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+    
+    /* Contenedor para alinear las tarjetas de los líderes en fila */
+    .contenedor-lideres {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    /* Cada tarjeta clicable de líder */
+    .lider-card {
+      background-color: #1e293b;
+      border: 2px solid #ef4444;
+      border-radius: 15px;
+      padding: 15px;
+      width: 110px;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    /* Efecto épico al pasar el mouse por encima */
+    .lider-card:hover {
+      transform: translateY(-6px) scale(1.05);
+      border-color: #fde047;
+      box-shadow: 0 0 18px rgba(253, 224, 71, 0.6);
+    }
+
+    /* Tamaño y forma del GIF/icono de GD */
+    .lider-card img {
+      width: 65px;
+      height: 65px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+
+    .lider-card span {
+      font-weight: bold;
+      font-size: 14px;
+      color: #fde047;
+    }
+    
+    /* Estilo del reproductor de YouTube dentro de cada tarjeta */
+    .tarjeta iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    
   </style>
 </head>
 <body>
 
-  <!-- Aquí va el contenido visible (HTML) -->
-  <div class="caja">
-    <h1>aprendiendo</h1>
-    <p>Sevvend clubstep🤑</p>
+  <!-- PANTALLA 1: PRESENTACIÓN (Visible al entrar) -->
+  <div id="pantalla-inicio">
+    <h1>Fraka List V4.0</h1>
+    <p>Bienvenido a la nueva pagina web de la frakalist, aqui encontraras los niveles más dificiles que el Frakaclan a completado</p>
+    
+    <button onclick="abrirLista()">Ver lista</button>
+    <button class="naranja" onclick="abrirJugadores()">Jugadores</button>
+    <button class="hanky" onclick="abrirReglas()">Reglas</button>
+<h2 style="margin-top: 35px; color: #fca5a5;">👑 Fraka Liders 👑</h2>
+
+    <div class="contenedor-lideres">
+      
+      <a href="https://www.youtube.com/@Kepta-BB" target="_blank" class="lider-card">
+        <img src="https://yt3.googleusercontent.com/5txd4q060y6gDxWeZqjXPc-n07QGlQ4O8dbWJaJWDlElcA5SzVRw3X1WDTwXsBpsJS7g09xXiQ=s160-c-k-c0x00ffffff-no-rj">
+        <span>Kepta_bb</span>
+      </a>
+
+      <a href="https://www.youtube.com/@S3bAs506GD" target="_blank" class="lider-card">
+        <img src="https://yt3.googleusercontent.com/GPX0kVQAFsRkYfHoUL-k36XTMkjNT2G_2h4toxbVoToY2j-Q_iDVy8HexzFNRrfRwKShxl_p=s160-c-k-c0x00ffffff-no-rj">
+        <span>s3bAs506</span>
+      </a>
+
+      <a href="https://www.youtube.com/@theglaicat" target="_blank" class="lider-card">
+        <img src="https://yt3.googleusercontent.com/JtBEdJ-1LFiQRadrWghWDHuOsmRormavoxqdarMKoyHpYTOLbdZT2ESY9UEcH1CWHGZm5sVfths=s160-c-k-c0x00ffffff-no-rj" alt="Theglaicat">
+        <span>Theglaicat</span>
+      </a>
+
+      <a href="https://www.youtube.com/@xReizer_8" target="_blank" class="lider-card">
+        <img src="https://yt3.googleusercontent.com/GSnzYppP9YP9wpIJXwkimNEaXJnJQF57jxPw09peFuTuKhO82jlvuESs1qs07QKdBkcDUz10=s160-c-k-c0x00ffffff-no-rj">
+        <span>xReizer_8</span>
+      </a>
+
+    </div>
+      </div>
+  
+  <!-- PANTALLA 2: LA LISTA DE NIVELES (Oculta al entrar) -->
+  <div id="pantalla-lista" class="oculto">
+    <h1>Lista Oficial - Frakaclan</h1>
+    <button onclick="volverInicio()">⬅ Volver al inicio</button>
+
+    <div class="tarjeta">
+      <h2>#1 - Slaughterhouse</h2>
+      <p>Creador: ICEDcave | Fraka verifier: Fiumba</p>
+      <iframe src="https://www.youtube.com/embed/mTzpShAuee8" allowfullscreen></iframe>
+    </div>
+
+    <div class="tarjeta">
+      <h2>#2 - Cold sweat</h2>
+      <p>Creador: Para | Fraka verifier: Fiumba</p>
+<iframe src="https://www.youtube.com/embed/ogPj5spEffY" allowfullscreen></iframe>
+    </div>
+
+    <div class="tarjeta">
+      <h2>#3 - Solar flare</h2>
+      <p>Creador: Linear2 | Completado por: Fiumba</p>
+         <iframe src="https://www.youtube.com/embed/rDdnROjX3Ak" allowfullscreen></iframe>
+    </div>
   </div>
+
+  <!-- PANTALLA 3: JUGADORES DEL CLAN (Oculta al entrar) -->
+  <div id="pantalla-jugadores" class="oculto">
+    <h1>Top Jugadores - Frakaclan</h1>
+    <button onclick="volverInicio()">⬅ Volver al inicio</button>
+
+    <div class="tarjeta-jugador">
+      <h2>#1 - Fiumba</h2>
+      <p>Puntos: 150 | Récord más difícil: Slaughterhouse</p>
+    </div>
+
+    <div class="tarjeta-jugador">
+      <h2>#2 - Fabian</h2>
+      <p>Puntos: 85 | Récord más difícil: Inside</p>
+    </div>
+  </div>
+
+  <!-- PANTALLA 4: REGLAS DE LA LISTA (Oculta al entrar) -->
+  <div id="pantalla-reglas" class="oculto">
+    <h1>Reglas Oficiales - Frakaclan</h1>
+    <button onclick="volverInicio()">⬅ Volver al inicio</button>
+
+    <div class="tarjeta-regla">
+      <h2>1. Video obligatorio</h2>
+      <p>Todo récord enviado debe incluir grabación completa del intento con clics audibles.</p>
+    </div>
+
+    <div class="tarjeta-regla">
+      <h2>2. Cero hacks o modificaciones</h2>
+      <p>El uso de noclip, speedhack o macros resultará en baneo permanente de la lista.</p>
+    </div>
+
+    <div class="tarjeta-regla">
+      <h2>3. Verificación por Mods</h2>
+      <p>Un moderador del Frakaclan revisará el video antes de sumar los puntos al perfil.</p>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: Cambia entre las 4 pantallas -->
+  <script>
+    function abrirLista() {
+      document.getElementById("pantalla-inicio").style.display = "none";
+      document.getElementById("pantalla-lista").style.display = "block";
+    }
+
+    function abrirJugadores() {
+      document.getElementById("pantalla-inicio").style.display = "none";
+      document.getElementById("pantalla-jugadores").style.display = "block";
+    }
+
+    function abrirReglas() {
+      document.getElementById("pantalla-inicio").style.display = "none";
+      document.getElementById("pantalla-reglas").style.display = "block";
+    }
+
+    function volverInicio() {
+      document.getElementById("pantalla-lista").style.display = "none";
+      document.getElementById("pantalla-jugadores").style.display = "none";
+      document.getElementById("pantalla-reglas").style.display = "none";
+      document.getElementById("pantalla-inicio").style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
+
