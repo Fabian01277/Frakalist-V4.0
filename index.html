@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fraka List V4.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: darkred;
+body {
+      background-color: darkred; /* Respaldo por si la red bloquea Pinterest */
+      background-image: linear-gradient(rgba(35, 0, 0, 0.72), rgba(15, 0, 0, 0.85)), url("https://i.pinimg.com/originals/27/00/d6/2700d6f5505c41ec96ed10798d9f86ac.gif");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: white;
-      font-family: sans-serif;
+      font-family: 'Science Gothic', sans-serif;
       text-align: center;
       padding: 30px;
     }
@@ -39,9 +44,51 @@
       color: white;
     }
 
-    /* Oculta las pantallas secundarias al entrar */
     .oculto {
       display: none;
+    }
+
+    /* Contenedor de los líderes en inicio */
+    .contenedor-lideres {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .lider-card {
+      background-color: #1e293b;
+      border: 2px solid #ef4444;
+      border-radius: 15px;
+      padding: 15px;
+      width: 110px;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .lider-card:hover {
+      transform: translateY(-6px) scale(1.05);
+      border-color: #fde047;
+      box-shadow: 0 0 18px rgba(253, 224, 71, 0.6);
+    }
+
+    .lider-card img {
+      width: 65px;
+      height: 65px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+
+    .lider-card span {
+      font-weight: bold;
+      font-size: 14px;
+      color: #fde047;
     }
 
     /* Diseño de cada tarjeta de nivel */
@@ -63,6 +110,14 @@
     .tarjeta p {
       margin: 0;
       color: #cbd5e1;
+    }
+
+    .tarjeta iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 15px;
     }
 
     /* Diseño de cada tarjeta de jugador */
@@ -106,62 +161,6 @@
       margin: 0;
       color: #cbd5e1;
     }
-    
-    /* Contenedor para alinear las tarjetas de los líderes en fila */
-    .contenedor-lideres {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 25px;
-    }
-
-    /* Cada tarjeta clicable de líder */
-    .lider-card {
-      background-color: #1e293b;
-      border: 2px solid #ef4444;
-      border-radius: 15px;
-      padding: 15px;
-      width: 110px;
-      text-decoration: none;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    }
-
-    /* Efecto épico al pasar el mouse por encima */
-    .lider-card:hover {
-      transform: translateY(-6px) scale(1.05);
-      border-color: #fde047;
-      box-shadow: 0 0 18px rgba(253, 224, 71, 0.6);
-    }
-
-    /* Tamaño y forma del GIF/icono de GD */
-    .lider-card img {
-      width: 65px;
-      height: 65px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      object-fit: cover;
-    }
-
-    .lider-card span {
-      font-weight: bold;
-      font-size: 14px;
-      color: #fde047;
-    }
-    
-    /* Estilo del reproductor de YouTube dentro de cada tarjeta */
-    .tarjeta iframe {
-      width: 100%;
-      height: 280px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 15px;
-    }
-    
   </style>
 </head>
 <body>
@@ -174,14 +173,15 @@
     <button onclick="abrirLista()">Ver lista</button>
     <button class="naranja" onclick="abrirJugadores()">Jugadores</button>
     <button class="hanky" onclick="abrirReglas()">Reglas</button>
-<h2 style="margin-top: 35px; color: #fca5a5;">👑 Fraka Liders 👑</h2>
+
+    <h2 style="margin-top: 35px; color: #fca5a5;">👑 Fraka Liders 👑</h2>
 
     <div class="contenedor-lideres">
-      
       <a href="https://www.youtube.com/@Kepta-BB" target="_blank" class="lider-card">
         <img src="https://yt3.googleusercontent.com/5txd4q060y6gDxWeZqjXPc-n07QGlQ4O8dbWJaJWDlElcA5SzVRw3X1WDTwXsBpsJS7g09xXiQ=s160-c-k-c0x00ffffff-no-rj">
         <span>Kepta_bb</span>
       </a>
+
 
       <a href="https://www.youtube.com/@S3bAs506GD" target="_blank" class="lider-card">
         <img src="https://yt3.googleusercontent.com/GPX0kVQAFsRkYfHoUL-k36XTMkjNT2G_2h4toxbVoToY2j-Q_iDVy8HexzFNRrfRwKShxl_p=s160-c-k-c0x00ffffff-no-rj">
@@ -197,51 +197,24 @@
         <img src="https://yt3.googleusercontent.com/GSnzYppP9YP9wpIJXwkimNEaXJnJQF57jxPw09peFuTuKhO82jlvuESs1qs07QKdBkcDUz10=s160-c-k-c0x00ffffff-no-rj">
         <span>xReizer_8</span>
       </a>
-
     </div>
-      </div>
-  
-  <!-- PANTALLA 2: LA LISTA DE NIVELES (Oculta al entrar) -->
+  </div>
+
+  <!-- PANTALLA 2: LA LISTA DE NIVELES (Se llena sola) -->
   <div id="pantalla-lista" class="oculto">
     <h1>Lista Oficial - Frakaclan</h1>
     <button onclick="volverInicio()">⬅ Volver al inicio</button>
-
-    <div class="tarjeta">
-      <h2>#1 - Slaughterhouse</h2>
-      <p>Creador: ICEDcave | Fraka verifier: Fiumba</p>
-      <iframe src="https://www.youtube.com/embed/mTzpShAuee8" allowfullscreen></iframe>
-    </div>
-
-    <div class="tarjeta">
-      <h2>#2 - Cold sweat</h2>
-      <p>Creador: Para | Fraka verifier: Fiumba</p>
-<iframe src="https://www.youtube.com/embed/ogPj5spEffY" allowfullscreen></iframe>
-    </div>
-
-    <div class="tarjeta">
-      <h2>#3 - Solar flare</h2>
-      <p>Creador: Linear2 | Completado por: Fiumba</p>
-         <iframe src="https://www.youtube.com/embed/rDdnROjX3Ak" allowfullscreen></iframe>
-    </div>
+    <div id="contenedor-niveles"></div>
   </div>
 
-  <!-- PANTALLA 3: JUGADORES DEL CLAN (Oculta al entrar) -->
+  <!-- PANTALLA 3: JUGADORES DEL CLAN (Se calcula y ordena sola) -->
   <div id="pantalla-jugadores" class="oculto">
     <h1>Top Jugadores - Frakaclan</h1>
     <button onclick="volverInicio()">⬅ Volver al inicio</button>
-
-    <div class="tarjeta-jugador">
-      <h2>#1 - Fiumba</h2>
-      <p>Puntos: 150 | Récord más difícil: Slaughterhouse</p>
-    </div>
-
-    <div class="tarjeta-jugador">
-      <h2>#2 - Fabian</h2>
-      <p>Puntos: 85 | Récord más difícil: Inside</p>
-    </div>
+    <div id="contenedor-jugadores"></div>
   </div>
 
-  <!-- PANTALLA 4: REGLAS DE LA LISTA (Oculta al entrar) -->
+  <!-- PANTALLA 4: REGLAS DE LA LISTA -->
   <div id="pantalla-reglas" class="oculto">
     <h1>Reglas Oficiales - Frakaclan</h1>
     <button onclick="volverInicio()">⬅ Volver al inicio</button>
@@ -262,8 +235,108 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT: Cambia entre las 4 pantallas -->
+  <!-- JAVASCRIPT: Motor de puntos y navegación -->
   <script>
+    const niveles = [
+      {
+        nombre: "Slaughterhouse",
+        creador: "ICEDcave",
+        verificador: "Fiumba",
+        videoID: "mTzpShAuee8"
+      },
+      {
+        nombre: "Cold sweat",
+        creador: "Para",
+        verificador: "Fiumba",
+        videoID: "ogPj5spEffY"
+      },
+      {
+        nombre: "Solar flare",
+        creador: "Linear2",
+        verificador: "Fiumba",
+        videoID: "rDdnROjX3Ak"
+      }
+    ];
+
+    const jugadores = [
+      {
+        nombre: "Fiumba",
+        nivelesCompletados: ["Slaughterhouse", "Cold sweat", "Solar flare"]
+      },
+      {
+        nombre: "Fabian",
+        nivelesCompletados: ["Solar flare"]
+      }
+    ];
+
+    function calcularPuntosPorTop(posicion) {
+      let puntos = 350 - (posicion * 40);
+      if (puntos < 15) {
+        puntos = 15;
+      }
+      return puntos;
+    }
+
+    function cargarLista() {
+      const contenedor = document.getElementById("contenedor-niveles");
+      contenedor.innerHTML = "";
+
+      niveles.forEach((nivel, index) => {
+        const puntosNivel = calcularPuntosPorTop(index);
+        contenedor.innerHTML += `
+          <div class="tarjeta">
+            <h2>#${index + 1} - ${nivel.nombre} (${puntosNivel} pts)</h2>
+            <p>Creador: ${nivel.creador} | Fraka verifier: ${nivel.verificador}</p>
+            <iframe src="https://www.youtube.com/embed/${nivel.videoID}" allowfullscreen></iframe>
+          </div>
+        `;
+      });
+    }
+
+    function cargarJugadores() {
+      const contenedor = document.getElementById("contenedor-jugadores");
+      contenedor.innerHTML = "";
+
+      const ranking = jugadores.map(jugador => {
+        let totalPuntos = 0;
+        let recordMasDificil = "Ninguno";
+        let mejorTop = 999;
+
+        jugador.nivelesCompletados.forEach(nombreNivel => {
+          const indexNivel = niveles.findIndex(n => n.nombre.toLowerCase() === nombreNivel.toLowerCase());
+          if (indexNivel !== -1) {
+            totalPuntos += calcularPuntosPorTop(indexNivel);
+            if (indexNivel < mejorTop) {
+              mejorTop = indexNivel;
+              recordMasDificil = niveles[indexNivel].nombre;
+            }
+          }
+        });
+
+        return {
+          nombre: jugador.nombre,
+          puntos: totalPuntos,
+          hardest: recordMasDificil,
+          completados: jugador.nivelesCompletados.length
+        };
+      });
+
+      ranking.sort((a, b) => b.puntos - a.puntos);
+
+      ranking.forEach((jug, index) => {
+        contenedor.innerHTML += `
+          <div class="tarjeta-jugador">
+            <h2>#${index + 1} - ${jug.nombre}</h2>
+            <p>Puntos totales: <strong>${jug.puntos} pts</strong> | Niveles de lista: ${jug.completados}</p>
+            <p style="margin-top: 5px; font-size: 14px;">Récord más difícil: ${jug.hardest}</p>
+          </div>
+        `;
+      });
+    }
+
+    cargarLista();
+    cargarJugadores();
+
     function abrirLista() {
       document.getElementById("pantalla-inicio").style.display = "none";
       document.getElementById("pantalla-lista").style.display = "block";
@@ -289,4 +362,3 @@
 
 </body>
 </html>
-
