@@ -1,2 +1,2 @@
 # pagina-web
-pagina web que te ayuda a paginear una web
+Wow, encontraste el codigo fuente de la mejor pagina del fucking mundo :D
