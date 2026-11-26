@@ -15,13 +15,15 @@
       color: white;
       font-family: 'Science Gothic', sans-serif;
       text-align: center;
-      padding: 30px;
+      padding: 30px 16px;
     }
 
     h1 {
-      font-size: 55px;
+      font-size: clamp(28px, 6vw, 55px);
       font-weight: 600;
       text-transform: uppercase;
+      word-break: break-word;
+      margin-top: 35px;
       background: linear-gradient(100deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.25) 45%, rgba(255,255,255,0.85) 55%, rgba(255,255,255,0.15) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -152,6 +154,42 @@
       font-size: 14px;
     }
 
+    /* TARJETA ESPECIAL DE CAMPEÓN PARA EL FRAKA DEL MES */
+    .tarjeta-fraka-mes {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.22) 0%, rgba(120, 10, 10, 0.65) 50%, rgba(251, 191, 36, 0.15) 100%);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      max-width: 600px;
+      margin: 25px auto;
+      padding: 28px 22px 24px 22px;
+      border-radius: 22px;
+      border: 2px solid #fbbf24;
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.35), inset 0 0 20px rgba(251, 191, 36, 0.15);
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tarjeta-fraka-mes:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 0 40px rgba(251, 191, 36, 0.6), inset 0 0 25px rgba(251, 191, 36, 0.25);
+    }
+
+    .avatar-con-corona {
+      position: relative;
+      display: inline-block;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .corona-flotante {
+      position: absolute;
+      top: -26px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-6deg);
+      font-size: 34px;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.85));
+    }
+
     .tarjeta iframe {
       width: 100%;
       height: 280px;
@@ -159,9 +197,127 @@
       border-radius: 12px;
       margin-top: 15px;
     }
+
+    /* BOTÓN DE 3 LÍNEAS (MENÚ HAMBURGUESA) Y MENÚ DESPLEGABLE */
+    .btn-hamburguesa {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 1001;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      margin: 0;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-hamburguesa:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: scale(1.06);
+    }
+
+    .mini-menu {
+      position: fixed;
+      top: 76px;
+      left: 18px;
+      z-index: 1000;
+      width: 250px;
+      background: rgba(15, 0, 0, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-top: 1.5px solid rgba(255, 255, 255, 0.65);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: left;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mini-menu.abierto {
+      display: flex;
+    }
+
+    .mini-menu-item {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 0;
+      font-size: 15px;
+      text-align: left;
+      width: 100%;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .mini-menu-item:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateX(4px);
+    }
+
+    .mini-menu-divisor {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin: 6px 0;
+    }
+
+    .btn-discord {
+      background: #5865F2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(88, 101, 242, 0.45);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-discord:hover {
+      background: #4752C4;
+      transform: scale(1.02);
+    }
   </style>
 </head>
 <body>
+
+  <!-- BOTÓN DE 3 LÍNEAS Y MINI MENÚ -->
+  <button class="btn-hamburguesa" onclick="toggleMenu()" title="Menú">☰</button>
+
+  <div id="mini-menu" class="mini-menu">
+    <button class="mini-menu-item" onclick="navegarDesdeMenu('inicio')">🏠 Inicio</button>
+    <button class="mini-menu-item" onclick="navegarDesdeMenu('lista')">📋 Lista</button>
+    <button class="mini-menu-item" onclick="navegarDesdeMenu('jugadores')">🏆 Jugadores</button>
+    <button class="mini-menu-item" onclick="navegarDesdeMenu('fraka-mes')">👑 Fraka del Mes</button>
+    <button class="mini-menu-item" onclick="navegarDesdeMenu('carrera')">⚡ Carrera en Nivel</button>
+    <hr class="mini-menu-divisor">
+    <div id="zona-discord">
+      <button class="btn-discord" onclick="iniciarSesionDiscord()">
+        🎮 Iniciar sesión con Discord
+      </button>
+    </div>
+  </div>
 
   <!-- PANTALLA 1: PRESENTACIÓN (Visible al entrar) -->
   <div id="pantalla-inicio">
@@ -172,6 +328,9 @@
     <button class="naranja" onclick="abrirJugadores()">Jugadores</button>
     <button class="hanky" onclick="abrirReglas()">Reglas</button>
 
+    <!-- VITRINA DEL GANADOR DEL FRAKA DEL MES -->
+    <div id="vitrina-fraka-mes-inicio"></div>
+
     <h2 style="margin-top: 35px; color: #fca5a5;">👑 Fraka Liders 👑</h2>
 
     <div class="contenedor-lideres">
@@ -179,7 +338,6 @@
         <img src="https://yt3.googleusercontent.com/5txd4q060y6gDxWeZqjXPc-n07QGlQ4O8dbWJaJWDlElcA5SzVRw3X1WDTwXsBpsJS7g09xXiQ=s160-c-k-c0x00ffffff-no-rj">
         <span>Kepta_bb</span>
       </a>
-
 
       <a href="https://www.youtube.com/@S3bAs506GD" target="_blank" class="lider-card">
         <img src="https://yt3.googleusercontent.com/GPX0kVQAFsRkYfHoUL-k36XTMkjNT2G_2h4toxbVoToY2j-Q_iDVy8HexzFNRrfRwKShxl_p=s160-c-k-c0x00ffffff-no-rj">
@@ -233,14 +391,123 @@
     </div>
   </div>
 
-<!-- PANTALLA 5: FICHA COMPLETA DE UN NIVEL -->
+  <!-- PANTALLA 5: FICHA COMPLETA DE UN NIVEL -->
   <div id="pantalla-detalle-nivel" class="oculto">
     <button onclick="volverALista()">⬅ Volver a la lista</button>
     <div id="contenido-detalle-nivel"></div>
   </div>
   
-  <!-- JAVASCRIPT: Motor de puntos y navegación -->
-<script>
+  <!-- PANTALLA 6: PERFIL COMPLETO DE UN JUGADOR -->
+  <div id="pantalla-detalle-jugador" class="oculto">
+    <button onclick="volverAJugadores()">⬅ Volver a jugadores</button>
+    <div id="contenido-detalle-jugador"></div>
+  </div>
+  
+  <!-- PANTALLA 7: HISTORIAL FRAKA DEL MES -->
+  <div id="pantalla-fraka-mes" class="oculto">
+    <h1>👑 FRAKA DEL MES</h1>
+    <button onclick="volverInicio()">⬅ Volver al inicio</button>
+    <p style="margin-top: 10px; color: #fde047;">Ganadores elegidos por votación oficial en el Discord del Frakaclan</p>
+    <div id="contenido-fraka-mes"></div>
+  </div>
+
+  <!-- PANTALLA 8: CARRERA EN TAL NIVEL -->
+  <div id="pantalla-carrera" class="oculto">
+    <h1>⚡ CARRERA DE NIVEL</h1>
+    <button onclick="volverInicio()">⬅ Volver al inicio</button>
+    <div class="tarjeta">
+      <h2>
+        <span>🔥 Carrera Activa: Slaughterhouse</span>
+        <span class="badge-puntos">EN CURSO</span>
+      </h2>
+      <p style="margin-bottom: 15px;">Compite por el mejor progreso o primera verificación oficial del clan.</p>
+      <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; line-height: 2;">
+        <p>🥇 <strong>Fiumba:</strong> 100% (Completado)</p>
+        <p>🥈 <strong>Fabygamer:</strong> 54% (En progreso)</p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // CONTROL DEL MINI MENÚ HAMBURGUESA (☰)
+    function toggleMenu() {
+      const menu = document.getElementById("mini-menu");
+      menu.classList.toggle("abierto");
+    }
+
+    document.addEventListener("click", function(e) {
+      const menu = document.getElementById("mini-menu");
+      const btn = document.querySelector(".btn-hamburguesa");
+      if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.remove("abierto");
+      }
+    });
+
+    function ocultarTodasLasPantallas() {
+      const ids = [
+        "pantalla-inicio",
+        "pantalla-lista",
+        "pantalla-detalle-nivel",
+        "pantalla-jugadores",
+        "pantalla-detalle-jugador",
+        "pantalla-reglas",
+        "pantalla-fraka-mes",
+        "pantalla-carrera"
+      ];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      });
+    }
+
+    function navegarDesdeMenu(destino) {
+      document.getElementById("mini-menu").classList.remove("abierto");
+      ocultarTodasLasPantallas();
+
+      if (destino === "inicio") document.getElementById("pantalla-inicio").style.display = "block";
+      if (destino === "lista") document.getElementById("pantalla-lista").style.display = "block";
+      if (destino === "jugadores") document.getElementById("pantalla-jugadores").style.display = "block";
+      if (destino === "fraka-mes") document.getElementById("pantalla-fraka-mes").style.display = "block";
+      if (destino === "carrera") document.getElementById("pantalla-carrera").style.display = "block";
+    }
+
+    // SESIÓN DE DISCORD
+    function iniciarSesionDiscord() {
+      const usuario = prompt("Ingresa tu usuario de Discord del Frakaclan:");
+      if (usuario && usuario.trim() !== "") {
+        localStorage.setItem("fraka_discord_user", usuario.trim());
+        actualizarEstadoDiscord();
+      }
+    }
+
+    function cerrarSesionDiscord() {
+      localStorage.removeItem("fraka_discord_user");
+      actualizarEstadoDiscord();
+    }
+
+    function actualizarEstadoDiscord() {
+      const zona = document.getElementById("zona-discord");
+      const userGuardado = localStorage.getItem("fraka_discord_user");
+
+      if (userGuardado) {
+        zona.innerHTML = `
+          <div style="background: rgba(88, 101, 242, 0.25); border: 1px solid #5865F2; border-radius: 10px; padding: 10px; text-align: center;">
+            <p style="margin: 0 0 6px 0; font-size: 13px; color: #c7d2fe;">Conectado como:</p>
+            <strong style="font-size: 15px; color: white;">🎮 ${userGuardado}</strong>
+            <button onclick="cerrarSesionDiscord()" style="background: rgba(239,68,68,0.8); color: white; font-size: 12px; padding: 5px 10px; margin-top: 8px; width: 100%; border-radius: 8px;">Cerrar sesión</button>
+          </div>
+        `;
+      } else {
+        zona.innerHTML = `
+          <button class="btn-discord" onclick="iniciarSesionDiscord()">
+            🎮 Iniciar sesión con Discord
+          </button>
+        `;
+      }
+    }
+
+    actualizarEstadoDiscord();
+
     // 1. LISTA DE NIVELES CON TODOS SUS DATOS
     const niveles = [
       {
@@ -269,19 +536,31 @@
       }
     ];
 
-    // 2. LISTA DE JUGADORES Y NIVELES QUE HAN PASADO
+    // 2. LISTA DE JUGADORES
     const jugadores = [
       {
         nombre: "Fiumba",
+        fotoPerfil: "https://yt3.googleusercontent.com/P4h8v8Pqf1d-7HBZHWTc1B24940aXh3o-63EoDQFZtUdrjuORIn324SwHpQrJIunS_P83JMQ=s160-c-k-c0x00ffffff-no-rj",
         nivelesCompletados: ["Slaughterhouse", "Cold sweat", "Solar flare"]
       },
       {
-        nombre: "Fabian",
+        nombre: "Fabygamer",
+        fotoPerfil: "https://yt3.googleusercontent.com/3FyOtItwrhdVFKVLRCBaaAE-fcI6_M7s1bnUnQ0sUTINQhoCpX5yJdG313ajsbaF7E2kRuOs-A=s160-c-k-c0x00ffffff-no-rj",
         nivelesCompletados: ["Solar flare"]
       }
     ];
 
-    // 3. FÓRMULA DE PUNTOS
+    // 3. GANADORES DEL FRAKA DEL MES
+    const historialFrakaDelMes = [
+      {
+        periodo: "NOVIEMBRE 2026",
+        jugador: "Fiumba",
+        nivel: "Slaughterhouse",
+        hazana: "Verificación oficial de los 3 primeros puestos de la lista."
+      }
+    ];
+
+    // 4. FÓRMULA DE PUNTOS
     function calcularPuntosPorTop(posicion) {
       let puntos = 350 - (posicion * 40);
       if (puntos < 15) {
@@ -290,7 +569,7 @@
       return puntos;
     }
 
-    // 4. DIBUJA LA LISTA PRINCIPAL (CLICABLE)
+    // 5. DIBUJA LA LISTA PRINCIPAL DE NIVELES (CLICABLE)
     function cargarLista() {
       const contenedor = document.getElementById("contenedor-niveles");
       contenedor.innerHTML = "";
@@ -304,14 +583,12 @@
               <span class="badge-puntos">${puntosNivel} PTS</span>
             </h2>
             <p>Creador: ${nivel.creador} | Fraka verifier: ${nivel.verificador}</p>
-       
-            <iframe src="https://www.youtube.com/embed/${nivel.videoID}" allowfullscreen></iframe>
           </div>
         `;
       });
     }
 
-    // 5. ABRE LA FICHA COMPLETA DE UN NIVEL CON FLECHAS ⬅ Y ➡
+    // 6. ABRE LA FICHA COMPLETA DE UN NIVEL CON FLECHAS ← Y →
     function abrirDetalleNivel(index) {
       const nivel = niveles[index];
       const puntosNivel = calcularPuntosPorTop(index);
@@ -324,7 +601,7 @@
         ? victors.map(v => `<span class="badge-puntos" style="margin: 4px; display: inline-block;">🏆 ${v}</span>`).join("")
         : "<p>Aún no hay victors registrados.</p>";
 
-const botonAnterior = index > 0
+      const botonAnterior = index > 0
         ? `<button onclick="abrirDetalleNivel(${index - 1})" style="font-size: 24px; padding: 8px 24px;">←</button>`
         : `<button disabled style="font-size: 24px; padding: 8px 24px; opacity: 0.3; cursor: not-allowed;">←</button>`;
 
@@ -334,7 +611,7 @@ const botonAnterior = index > 0
 
       const contenedor = document.getElementById("contenido-detalle-nivel");
       contenedor.innerHTML = `
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 15px 0;">
+        <div style="display: flex; justify-content: center; gap: 12px; margin: 15px 0;">
           ${botonAnterior}
           ${botonSiguiente}
         </div>
@@ -361,21 +638,23 @@ const botonAnterior = index > 0
         </div>
       `;
 
-      document.getElementById("pantalla-lista").style.display = "none";
+      ocultarTodasLasPantallas();
       document.getElementById("pantalla-detalle-nivel").style.display = "block";
     }
 
     function volverALista() {
-      document.getElementById("pantalla-detalle-nivel").style.display = "none";
+      ocultarTodasLasPantallas();
       document.getElementById("pantalla-lista").style.display = "block";
     }
 
-    // 6. SUMA PUNTOS Y ORDENA AL TOP DE JUGADORES
+    // 7. CALCULA RANKING DE JUGADORES Y DIBUJA SUS TARJETAS CLICABLES
+    let rankingGlobal = [];
+
     function cargarJugadores() {
       const contenedor = document.getElementById("contenedor-jugadores");
       contenedor.innerHTML = "";
 
-      const ranking = jugadores.map(jugador => {
+      rankingGlobal = jugadores.map(jugador => {
         let totalPuntos = 0;
         let recordMasDificil = "Ninguno";
         let mejorTop = 999;
@@ -386,59 +665,214 @@ const botonAnterior = index > 0
             totalPuntos += calcularPuntosPorTop(indexNivel);
             if (indexNivel < mejorTop) {
               mejorTop = indexNivel;
-              recordMasDificil = niveles[indexNivel].nombre;
+              recordMasDificil = `#${indexNivel + 1} - ${niveles[indexNivel].nombre}`;
             }
           }
         });
 
+        const verificados = niveles
+          .map((n, idx) => ({ ...n, top: idx + 1 }))
+          .filter(n => n.verificador.toLowerCase() === jugador.nombre.toLowerCase());
+
+        const creados = niveles
+          .map((n, idx) => ({ ...n, top: idx + 1 }))
+          .filter(n => n.creador.toLowerCase() === jugador.nombre.toLowerCase());
+
         return {
           nombre: jugador.nombre,
+          fotoPerfil: jugador.fotoPerfil,
           puntos: totalPuntos,
           hardest: recordMasDificil,
-          completados: jugador.nivelesCompletados.length
+          completadosLista: jugador.nivelesCompletados,
+          verificados: verificados,
+          creados: creados
         };
       });
 
-      ranking.sort((a, b) => b.puntos - a.puntos);
+      rankingGlobal.sort((a, b) => b.puntos - a.puntos);
 
-      ranking.forEach((jug, index) => {
+      rankingGlobal.forEach((jug, index) => {
         contenedor.innerHTML += `
-          <div class="tarjeta-jugador">
-            <h2>#${index + 1} - ${jug.nombre}</h2>
-            <p>Puntos totales: <strong>${jug.puntos} pts</strong> | Niveles de lista: ${jug.completados}</p>
-            <p style="margin-top: 5px; font-size: 14px;">Récord más difícil: ${jug.hardest}</p>
+          <div class="tarjeta-jugador" style="cursor: pointer;" onclick="abrirDetalleJugador(${index})">
+            <h2>
+              <span>#${index + 1} - ${jug.nombre}</span>
+              <span class="badge-puntos">${jug.puntos} PTS</span>
+            </h2>
+            <p>Niveles de lista: ${jug.completadosLista.length} | Récord más difícil: ${jug.hardest}</p>
           </div>
         `;
       });
     }
 
+    // 8. ABRE EL PERFIL COMPLETO DE UN JUGADOR CON FLECHAS ← Y →
+    function abrirDetalleJugador(index) {
+      const jug = rankingGlobal[index];
+
+      const botonAnterior = index > 0
+        ? `<button onclick="abrirDetalleJugador(${index - 1})" style="font-size: 24px; padding: 8px 24px;">←</button>`
+        : `<button disabled style="font-size: 24px; padding: 8px 24px; opacity: 0.3; cursor: not-allowed;">←</button>`;
+
+      const botonSiguiente = index < rankingGlobal.length - 1
+        ? `<button onclick="abrirDetalleJugador(${index + 1})" style="font-size: 24px; padding: 8px 24px;">→</button>`
+        : `<button disabled style="font-size: 24px; padding: 8px 24px; opacity: 0.3; cursor: not-allowed;">→</button>`;
+
+      const completadosHTML = jug.completadosLista.length > 0
+        ? jug.completadosLista.map(nombre => {
+            const idx = niveles.findIndex(n => n.nombre.toLowerCase() === nombre.toLowerCase());
+            const texto = idx !== -1 ? `#${idx + 1} - ${niveles[idx].nombre}` : nombre;
+            return `<span class="badge-puntos" style="margin: 4px; display: inline-block;">🏆 ${texto}</span>`;
+          }).join("")
+        : "<p>Ningún nivel completado aún.</p>";
+
+      const verificadosHTML = jug.verificados.length > 0
+        ? jug.verificados.map(n => `<span class="badge-puntos" style="margin: 4px; display: inline-block;">✅ #${n.top} - ${n.nombre}</span>`).join("")
+        : "<p>Ningún nivel verificado en la lista.</p>";
+
+      const creadosHTML = jug.creados.length > 0
+        ? jug.creados.map(n => `<span class="badge-puntos" style="margin: 4px; display: inline-block;">🛠️ #${n.top} - ${n.nombre}</span>`).join("")
+        : "<p>Ningún nivel creado en la lista.</p>";
+
+      const contenedor = document.getElementById("contenido-detalle-jugador");
+      contenedor.innerHTML = `
+        <div style="display: flex; justify-content: center; gap: 12px; margin: 15px 0;">
+          ${botonAnterior}
+          ${botonSiguiente}
+        </div>
+
+        <div class="tarjeta-jugador">
+          <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 18px; flex-wrap: wrap;">
+            <img src="${jug.fotoPerfil}" onerror="this.src='https://gdbrowser.com/icon/${jug.nombre}'" alt="${jug.nombre}" style="width: 80px; height: 80px; border-radius: 16px; border: 2px solid rgba(255,255,255,0.6); object-fit: cover;">
+            <div>
+              <h2 style="margin: 0;">#${index + 1} - ${jug.nombre}</h2>
+              <span class="badge-puntos" style="display: inline-block; margin-top: 6px;">${jug.puntos} PTS TOTALES</span>
+            </div>
+          </div>
+
+          <p style="font-size: 16px; margin-bottom: 15px;"><strong>🔥 Nivel más difícil completado:</strong> ${jug.hardest}</p>
+
+          <div style="margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.18);">
+            <h3 style="color: #fbbf24; margin: 0 0 8px 0; font-size: 17px;">🏆 Niveles Completados (${jug.completadosLista.length})</h3>
+            <div>${completadosHTML}</div>
+          </div>
+
+          <div style="margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.18);">
+            <h3 style="color: #4ade80; margin: 0 0 8px 0; font-size: 17px;">✅ Niveles Verificados (${jug.verificados.length})</h3>
+            <div>${verificadosHTML}</div>
+          </div>
+
+          <div style="margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.18);">
+            <h3 style="color: #38bdf8; margin: 0 0 8px 0; font-size: 17px;">🛠️ Niveles Creados (${jug.creados.length})</h3>
+            <div>${creadosHTML}</div>
+          </div>
+        </div>
+      `;
+
+      ocultarTodasLasPantallas();
+      document.getElementById("pantalla-detalle-jugador").style.display = "block";
+    }
+
+    function volverAJugadores() {
+      ocultarTodasLasPantallas();
+      document.getElementById("pantalla-jugadores").style.display = "block";
+    }
+
+    // 9. DIBUJA EL FRAKA DEL MES EN INICIO Y EN EL HISTORIAL
+    function cargarFrakaDelMes() {
+      const cajaInicio = document.getElementById("vitrina-fraka-mes-inicio");
+      const cajaHistorial = document.getElementById("contenido-fraka-mes");
+
+      if (cajaHistorial) cajaHistorial.innerHTML = "";
+
+      historialFrakaDelMes.forEach((ganador, index) => {
+        const indexRanking = rankingGlobal.findIndex(
+          j => j.nombre.toLowerCase() === ganador.jugador.toLowerCase()
+        );
+        const datosJugador = indexRanking !== -1 ? rankingGlobal[indexRanking] : null;
+        const foto = datosJugador
+          ? datosJugador.fotoPerfil
+          : `https://gdbrowser.com/icon/${ganador.jugador}`;
+
+        const accionClic = indexRanking !== -1 ? `abrirDetalleJugador(${indexRanking})` : "";
+        const estiloCursor = indexRanking !== -1 ? "cursor: pointer;" : "";
+
+        if (index === 0 && cajaInicio) {
+          cajaInicio.innerHTML = `
+            <div class="tarjeta-fraka-mes" style="${estiloCursor}" onclick="${accionClic}">
+              <div>
+                <span class="badge-puntos" style="border-color: #fbbf24; color: #fde047; font-weight: bold; background: rgba(0,0,0,0.4);">
+                  ✨ FRAKA DEL MES • ${ganador.periodo} ✨
+                </span>
+              </div>
+
+              <div class="avatar-con-corona">
+                <span class="corona-flotante">👑</span>
+                <img src="${foto}" alt="${ganador.jugador}" style="width: 92px; height: 92px; border-radius: 50%; border: 3px solid #fbbf24; object-fit: cover; box-shadow: 0 0 18px rgba(251, 191, 36, 0.7);">
+              </div>
+
+              <h2 style="margin: 4px 0; color: #fde047; font-size: 28px; text-shadow: 0 0 12px rgba(251, 191, 36, 0.8);">
+                ${ganador.jugador}
+              </h2>
+
+              <div style="margin: 10px 0;">
+                <span class="badge-puntos" style="background: rgba(251, 191, 36, 0.25); border-color: #fbbf24; color: #ffffff; font-size: 15px;">
+                  🔥 Nivel completado: <strong>${ganador.nivel}</strong>
+                </span>
+              </div>
+
+              <p style="margin: 8px 0 0 0; font-size: 14px; color: #fef08a;">
+                ${ganador.hazana}
+              </p>
+            </div>
+          `;
+        }
+
+        if (cajaHistorial) {
+          const claseTarjeta = index === 0 ? "tarjeta-fraka-mes" : "tarjeta";
+          cajaHistorial.innerHTML += `
+            <div class="${claseTarjeta}" style="${estiloCursor} text-align: center;" onclick="${accionClic}">
+              <span class="badge-puntos" style="border-color: #fbbf24; color: #fde047; font-weight: bold;">
+                📅 ${ganador.periodo}
+              </span>
+
+              <div class="avatar-con-corona">
+                ${index === 0 ? '<span class="corona-flotante">👑</span>' : ''}
+                <img src="${foto}" alt="${ganador.jugador}" style="width: 78px; height: 78px; border-radius: 50%; border: 2.5px solid #fbbf24; object-fit: cover;">
+              </div>
+
+              <h2 style="justify-content: center; margin: 4px 0; color: #fde047;">
+                ${index === 0 ? '🏆' : '🏅'} ${ganador.jugador}
+              </h2>
+
+              <p style="margin: 6px 0;"><strong>🔥 Nivel:</strong> ${ganador.nivel}</p>
+              <p style="font-size: 14px; color: #e2e8f0;">${ganador.hazana}</p>
+            </div>
+          `;
+        }
+      });
+    }
+
     cargarLista();
     cargarJugadores();
+    cargarFrakaDelMes();
 
     // NAVEGACIÓN ENTRE PANTALLAS
     function abrirLista() {
-      document.getElementById("pantalla-inicio").style.display = "none";
-      document.getElementById("pantalla-detalle-nivel").style.display = "none";
+      ocultarTodasLasPantallas();
       document.getElementById("pantalla-lista").style.display = "block";
     }
 
     function abrirJugadores() {
-      document.getElementById("pantalla-inicio").style.display = "none";
-      document.getElementById("pantalla-detalle-nivel").style.display = "none";
+      ocultarTodasLasPantallas();
       document.getElementById("pantalla-jugadores").style.display = "block";
     }
 
     function abrirReglas() {
-      document.getElementById("pantalla-inicio").style.display = "none";
-      document.getElementById("pantalla-detalle-nivel").style.display = "none";
+      ocultarTodasLasPantallas();
       document.getElementById("pantalla-reglas").style.display = "block";
     }
 
     function volverInicio() {
-      document.getElementById("pantalla-lista").style.display = "none";
-      document.getElementById("pantalla-detalle-nivel").style.display = "none";
-      document.getElementById("pantalla-jugadores").style.display = "none";
-      document.getElementById("pantalla-reglas").style.display = "none";
+      ocultarTodasLasPantallas();
       document.getElementById("pantalla-inicio").style.display = "block";
     }
   </script>
