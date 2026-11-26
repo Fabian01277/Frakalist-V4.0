@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraka del Mes - Fraka List V4.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <h1>👑 FRAKA DEL MES</h1>
+  <button onclick="window.location.href='../index.html'">⬅ Volver al inicio</button>
+  <p style="margin-top: 10px; color: #fde047;">Ganadores elegidos por votación oficial en el Discord del Frakaclan</p>
+  <div id="contenido-fraka-mes"></div>
+
+  <script src="../menu.js"></script>
+  <script src="../players/datos/lista_jugadores.js"></script>
+  <script src="datos/ganadores.js"></script>
+  <script>
+    inicializarMenuGlobal("../");
+
+    const contenedor = document.getElementById("contenido-fraka-mes");
+
+    if (typeof historialFrakaDelMes === "undefined" || historialFrakaDelMes.length === 0) {
+      contenedor.innerHTML = `
+        <div class="tarjeta" style="text-align: center;">
+          <h2 style="justify-content: center;">👑 Próximamente</h2>
+          <p>Aún no se ha elegido al primer Fraka del Mes en Discord.</p>
+        </div>
+      `;
+    } else {
+      historialFrakaDelMes.forEach((ganador, index) => {
+        const datosJug = typeof listaJugadores !== "undefined"
+          ? listaJugadores.find(j => j.nombre.toLowerCase() === ganador.jugador.toLowerCase())
+          : null;
+        const foto = datosJug ? datosJug.fotoPerfil : `https://gdbrowser.com/icon/${ganador.jugador}`;
+        const claseTarjeta = index === 0 ? "tarjeta-fraka-mes" : "tarjeta";
+
+        contenedor.innerHTML += `
+          <div class="${claseTarjeta}" style="text-align: center;">
+            <span class="badge-puntos" style="border-color: #fbbf24; color: #fde047; font-weight: bold;">
+              📅 ${ganador.periodo}
+            </span>
+
+            <div class="avatar-con-corona">
+              ${index === 0 ? '<span class="corona-flotante">👑</span>' : ''}
+              <img src="${foto}" alt="${ganador.jugador}" style="width: 78px; height: 78px; border-radius: 50%; border: 2.5px solid #fbbf24; object-fit: cover;">
+            </div>
+
+            <h2 style="justify-content: center; margin: 4px 0; color: #fde047;">
+              ${index === 0 ? '🏆' : '🏅'} ${ganador.jugador}
+            </h2>
+
+            <p style="margin: 6px 0;"><strong>🔥 Nivel:</strong> ${ganador.nivel}</p>
+            <p style="font-size: 14px; color: #e2e8f0;">${ganador.hazana}</p>
+          </div>
+        `;
+      });
+    }
+  </script>
+
+</body>
+</html>
