@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrera en Nivel - Fraka List V4.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <h1>⚡ CARRERA DE NIVEL</h1>
+  <button onclick="window.location.href='../index.html'">⬅ Volver al inicio</button>
+  <div id="contenido-carrera"></div>
+
+  <script src="../menu.js"></script>
+  <script src="datos/carreras.js"></script>
+  <script>
+    inicializarMenuGlobal("../");
+
+    const contenedor = document.getElementById("contenido-carrera");
+
+    if (typeof carrerasActivas === "undefined" || carrerasActivas.length === 0) {
+      contenedor.innerHTML = `
+        <div class="tarjeta" style="text-align: center;">
+          <h2 style="justify-content: center;">⚡ Sin carreras activas</h2>
+          <p>Actualmente no hay ninguna carrera en curso en el clan.</p>
+        </div>
+      `;
+    } else {
+      carrerasActivas.forEach(carrera => {
+        const ordenados = [...carrera.participantes].sort((a, b) => b.porcentaje - a.porcentaje);
+        const listaHTML = ordenados.map((p, idx) => {
+          const medalla = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : "🎮";
+          return `
+            <div style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 15px;">
+                <span>${medalla} <strong>${p.jugador}</strong></span>
+                <span style="color: #fde047; font-weight: bold;">${p.porcentaje}%</span>
+              </div>
+              <div class="barra-fondo">
+                <div class="barra-relleno" style="width: ${p.porcentaje}%;"></div>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        contenedor.innerHTML += `
+          <div class="tarjeta">
+            <h2>
+              <span>🔥 ${carrera.nivel}</span>
+              <span class="badge-puntos">${carrera.estado}</span>
+            </h2>
+            <p style="margin-bottom: 16px;">${carrera.descripcion}</p>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 14px;">
+              ${listaHTML}
+            </div>
+          </div>
+        `;
+      });
+    }
+  </script>
+
+</body>
+</html>
