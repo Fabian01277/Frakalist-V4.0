@@ -22,18 +22,52 @@
     <div id="contenido-detalle-nivel"></div>
   </div>
 
-  <!-- SCRIPTS COMPARTIDOS Y DATOS -->
+  <!-- SCRIPTS COMPARTIDOS -->
   <script src="../menu.js"></script>
-  <script src="datos/lista_niveles.js"></script>
-  <script src="datos/orden.js"></script>
   <script src="../players/datos/lista_jugadores.js"></script>
   <script>
     inicializarMenuGlobal("../");
 
-    // 1. Ordena los niveles según 'orden.js' (del #1 más difícil al más fácil)
-    const nivelesOrdenados = ordenNiveles
-      .map(nombreOrden => listaNiveles.find(n => n.nombre.toLowerCase() === nombreOrden.toLowerCase()))
-      .filter(n => n !== undefined);
+    let nivelesOrdenados = [];
+
+    // 1. Carga orden.json y luego descarga cada .json individual de la carpeta datos/niveles/
+    async function cargarNivelesDesdeJSON() {
+      const contenedor = document.getElementById("contenedor-niveles");
+
+      try {
+        const respuestaOrden = await fetch("datos/orden.json");
+        const listaOrden = await respuestaOrden.json();
+
+        if (!listaOrden || listaOrden.length === 0) {
+          contenedor.innerHTML = `
+            <div class="tarjeta" style="text-align: center;">
+              <h2 style="justify-content: center;">📋 Lista en preparación</h2>
+              <p>Aún no hay niveles registrados en la Fraka List V4.0.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Descarga cada archivo .json en el orden exacto de orden.json
+        const promesas = listaOrden.map(archivo =>
+          fetch(`datos/niveles/${archivo}.json`)
+            .then(res => res.ok ? res.json() : null)
+            .catch(() => null)
+        );
+
+        const resultados = await Promise.all(promesas);
+        nivelesOrdenados = resultados.filter(n => n !== null);
+
+        renderizarLista();
+      } catch (error) {
+        contenedor.innerHTML = `
+          <div class="tarjeta" style="text-align: center;">
+            <h2 style="justify-content: center;">📋 Lista en preparación</h2>
+            <p>Aún no hay niveles registrados en la Fraka List V4.0.</p>
+          </div>
+        `;
+      }
+    }
 
     // 2. Dibuja las tarjetas en pantalla
     function renderizarLista() {
@@ -123,7 +157,7 @@
       document.getElementById("vista-lista").style.display = "block";
     }
 
-    renderizarLista();
+    cargarNivelesDesdeJSON();
   </script>
 
 </body>
