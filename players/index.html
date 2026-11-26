@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Jugadores - Fraka List V4.0</title>
-  <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/estilos.css">
-</head>
-<body>
-
-  <!-- VISTA PRINCIPAL DEL RANKING -->
-  <div id="vista-jugadores">
-    <h1>Top Jugadores - Frakaclan</h1>
-    <button onclick="window.location.href='../index.html'">⬅ Volver al inicio</button>
-    <div id="contenedor-jugadores"></div>
-  </div>
-
-  <!-- VISTA DETALLADA DE UN JUGADOR -->
-  <div id="vista-detalle-jugador" class="oculto">
-    <button onclick="volverAJugadores()">⬅ Volver a jugadores</button>
-    <div id="contenido-detalle-jugador"></div>
-  </div>
-
-  <!-- SCRIPTS COMPARTIDOS Y DATOS -->
+<!-- SCRIPTS COMPARTIDOS Y DATOS -->
   <script src="../menu.js"></script>
-  <script src="../levels/datos/lista_niveles.js"></script>
-  <script src="../levels/datos/orden.js"></script>
   <script src="datos/lista_jugadores.js"></script>
   <script>
     inicializarMenuGlobal("../");
 
-    // Reconstruye el orden oficial de los niveles
-    const nivelesOrdenados = (typeof ordenNiveles !== "undefined" && typeof listaNiveles !== "undefined")
-      ? ordenNiveles
-          .map(nombreOrden => listaNiveles.find(n => n.nombre.toLowerCase() === nombreOrden.toLowerCase()))
-          .filter(n => n !== undefined)
-      : [];
-
+    let nivelesOrdenados = [];
     let rankingGlobal = [];
+
+    async function iniciarPlayers() {
+      try {
+        const resOrden = await fetch("../levels/datos/orden.json");
+        const listaOrden = await resOrden.json();
+        const promesas = listaOrden.map(archivo =>
+          fetch(`../levels/datos/niveles/${archivo}.json`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        );
+        const resultados = await Promise.all(promesas);
+        nivelesOrdenados = resultados.filter(n => n !== null);
+      } catch (e) {
+        nivelesOrdenados = [];
+      }
+
+      renderizarJugadores();
+    }
 
     function renderizarJugadores() {
       const contenedor = document.getElementById("contenedor-jugadores");
@@ -174,8 +160,5 @@
       document.getElementById("vista-jugadores").style.display = "block";
     }
 
-    renderizarJugadores();
+    iniciarPlayers();
   </script>
-
-</body>
-</html>
